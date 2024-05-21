@@ -4,9 +4,9 @@ const _ = require('lodash');
 
 const format = (filepath) => {
     if (filepath.endsWith('yaml')) {
-        return yaml.load(fs.readFileSync(filepath, 'utf8'));
+        return filepath.includes('./__fixtures__/') ? yaml.load(fs.readFileSync(filepath, 'utf8')) : yaml.load(fs.readFileSync('./__fixtures__/' + filepath, 'utf8'));
     } 
-    return JSON.parse(fs.readFileSync(filepath, 'utf-8'))
+    return filepath.includes('./__fixtures__/') ? JSON.parse(fs.readFileSync(filepath, 'utf-8')) : JSON.parse(fs.readFileSync('./__fixtures__/' + filepath, 'utf-8'))
     
 }
 
@@ -65,7 +65,7 @@ const stylish = (tree) => {
   return iter(tree, 1);
 };
 
-const genDiff = (filepath1, filepath2, style) => {
+const genDiff = (filepath1, filepath2, style = 'stylish') => {
     const file1 = format(filepath1);
     const file2 = format(filepath2);
     switch(style){
