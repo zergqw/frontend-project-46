@@ -1,0 +1,1 @@
+console.log(typeof({a:[1,2]}))
