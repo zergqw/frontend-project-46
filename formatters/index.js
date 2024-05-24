@@ -7,6 +7,8 @@ const format = (obj, style) => {
             return stylish(obj)
         case 'plain':
             return plain(obj)
+        case 'json':
+            return JSON.stringify(obj)
     }
 }
 module.exports = {format}
