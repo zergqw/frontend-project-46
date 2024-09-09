@@ -7,9 +7,9 @@ program
   .description('  Compares two configuration files and shows a difference.')
   .version('1.0.0')
   .option('-f, --format [type]', 'output format (default: "stylish")')
-  .arguments('<filepath1> <filepath2>')
-  .action((filepath1, filepath2, option) => {
-    console.log(genDiff(filepath1, filepath2, option.format))
+  .arguments('<filepath> <filepath2>')
+  .action((filepath, filepath2, option) => {
+    console.log(genDiff(filepath, filepath2, option.format))
     });
     
-program.parse(process.argv);
+program.parse(process.argv );
