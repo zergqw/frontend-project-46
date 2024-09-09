@@ -1,7 +1,7 @@
 const fs = require('fs');
 const yaml = require('js-yaml');
 const _ = require('lodash');
-const {format} = require('./formatters/index')
+const {format} = require('../formatters/index')
 
 const Parse = (filepath) => {
     if (filepath.endsWith('yaml')) {
