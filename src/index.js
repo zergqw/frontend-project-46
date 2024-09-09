@@ -1,21 +1,20 @@
-import fs from 'fs';
 import path from 'path';
-
+import fs from 'fs';
+import format from './formatter/index.js';
+import getDiffTree from './getdiff.js';
 import parse from './parsers.js';
-import buildDiff from './differ.js';
-import render from './formatters/index.js';
 
-export default (beforeFilePath, afterFilePath, outputFormat = 'tree') => {
-  const beforeContent = fs.readFileSync(beforeFilePath, 'utf-8');
-  const afterContent = fs.readFileSync(afterFilePath, 'utf-8');
-  const comparedFileType = path.extname(`${beforeFilePath}`).slice(1);
+const getFullPath = (filePath) => path.resolve(process.cwd(), filePath).trim();
+const readFile = (filepath) => fs.readFileSync(getFullPath(filepath), 'utf-8');
+const getFormat = (filepath) => path.extname(filepath).slice(1);
 
-  const before = parse(beforeContent, comparedFileType);
-  const after = parse(afterContent, comparedFileType);
-
-  const diff = buildDiff(before, after);
-
-  const resultOutput = render(diff, outputFormat);
-
-  return resultOutput;
+const gendiff = (path1, path2, formatName = 'stylish') => {
+  const pathContent1 = readFile(path1);
+  const pathContent2 = readFile(path2);
+  const data1 = parse(pathContent1, getFormat(path1));
+  const data2 = parse(pathContent2, getFormat(path2));
+  const diffTree = getDiffTree(data1, data2);
+  return format(diffTree, formatName);
 };
+
+export default gendiff;

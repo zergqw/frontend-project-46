@@ -1,16 +1,13 @@
 env:
   browser: true
-  es6: true
-  jest: true
-extends: 
-  - 'eslint:recommended'
+  es2021: true
+extends:
   - 'airbnb-base'
-globals:
-  Atomics: readonly
-  SharedArrayBuffer: readonly
+  - 'plugin:jest/recommended'
 parserOptions:
-  ecmaVersion: 2018
+  ecmaVersion: 12
   sourceType: module
 rules:
   no-console: 0
-  import/extensions: 0
+  import/extensions: 0 # FIXME: remove when rule will be adjusted for new nodejs version
+  no-underscore-dangle: [2, { "allow": ["__filename", "__dirname"] }]

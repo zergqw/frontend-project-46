@@ -1,14 +1,12 @@
 install:
-	npm install
-
-start:
-	npx babel-node src/bin/gendiff.js
-
-test:
-	npm test
-
-lint:
-	npx eslint .
-
+				npm install
 publish:
-	npm publish
+				npm publish --dry-run
+gendiff:
+				npm link
+lint:
+				npx eslint .
+test:
+				npm test
+test-coverage:
+				npm run test -- --coverage --coverageProvider=v8

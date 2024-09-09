@@ -1,17 +1,14 @@
 import yaml from 'js-yaml';
-import ini from 'ini';
 
-const parse = (data, dataType) => {
-  switch (dataType) {
+const parse = (data, extname) => {
+  switch (extname) {
     case 'json':
       return JSON.parse(data);
     case 'yml':
-      return yaml.safeLoad(data);
-    case 'ini':
-      return ini.parse(data);
+    case 'yaml':
+      return yaml.load(data);
     default:
-      throw new Error(`${dataType} is unknown data type!`);
+      throw new Error(`Unknown format: '${extname}'!`);
   }
 };
-
 export default parse;
